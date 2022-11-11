@@ -74,7 +74,8 @@ def create(request):
                 #response = HttpResponse(download(data["filepath"]), content_type='application/', status=200)
                 #return response
 
-                return download(data["filepath"])
+                return download(data["filepath"]) if data['status'] == "Success" else HttpResponse(
+                        json.dumps(data), content_type='application/json', status=200)
 
 @csrf_exempt
 def revoke(request):
